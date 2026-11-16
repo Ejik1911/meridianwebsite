@@ -893,3 +893,62 @@ body {
         font-size: 40px;
     }
 }
+/* ===== АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ ЗАГРУЗКЕ (главный экран) ===== */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.5s; }
+.delay-4 { animation-delay: 0.7s; }
+.delay-5 { animation-delay: 0.9s; }
+
+/* ===== АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ ПРОКРУТКЕ ВНИЗ ===== */
+.fade-in-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== ЭФФЕКТ ПРИ НАВЕДЕНИИ НА КАРТОЧКИ (как на GitVerse) ===== */
+.feature,
+.partner-card,
+.contact-form,
+.contact-info {
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.feature:hover,
+.partner-card:hover,
+.contact-form:hover,
+.contact-info:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 25px rgba(201, 185, 138, 0.15);
+    border-color: rgba(201, 185, 138, 0.5);
+}
+
+/* ===== ПЛАВНАЯ ПРОКРУТКА ПО ССЫЛКАМ МЕНЮ ===== */
+html {
+    scroll-behavior: smooth;
+}
