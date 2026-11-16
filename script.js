@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // ===== 2. 3D-ВРАЩЕНИЕ ЛОГОТИПА ПРИ СКРОЛЛЕ =====
+    // ===== 2. ПЛАВНОЕ 3D-ВРАЩЕНИЕ ЛОГОТИПА ПРИ СКРОЛЛЕ =====
     const logo = document.querySelector('.hero-logo');
     const wrapper = document.querySelector('.hero-logo-wrapper');
 
     if (logo && wrapper) {
-        // Добавляем perspective к родителю (важно для 3D!)
-        wrapper.style.perspective = '1200px';
+        wrapper.style.perspective = '1500px';
         logo.style.transformOrigin = 'center center';
+        logo.style.willChange = 'transform, opacity';
 
         let ticking = false;
 
@@ -29,13 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const y = window.scrollY;
             const vh = window.innerHeight;
             // progress от 0 до 1 за первый экран
-            const progress = Math.min(y / (vh * 0.8), 1);
+            const progress = Math.min(y / (vh * 1.2), 1); // увеличил с 0.8 до 1.2 для более медленного вращения
 
-            // Плавное вращение
-            const rotY = progress * 180;   // поворот на 180 градусов
-            const rotX = progress * 15;    // лёгкий наклон
-            const scale = 1 - progress * 0.3;  // уменьшается
-            const opacity = 1 - progress * 0.7;  // растворяется
+            // Плавное вращение с easing (замедление в конце)
+            const eased = progress < 0.5 
+                ? 2 * progress * progress 
+                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+            const rotY = eased * 120;   // поворот на 120 градусов (было 180)
+            const rotX = eased * 10;    // лёгкий наклон
+            const scale = 1 - eased * 0.2;  // уменьшается на 20%
+            const opacity = 1 - eased * 0.5;  // растворяется на 50%
 
             logo.style.transform = 
                 `rotateY(${rotY}deg) rotateX(${rotX}deg) scale(${scale})`;
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
 
-        update(); // запускаем сразу
+        update();
     }
 
     // ===== 3. ПЛАВНАЯ ПРОКРУТКА ПО МЕНЮ =====

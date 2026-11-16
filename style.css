@@ -977,10 +977,5 @@ html {
 .hero h2, .hero-subtitle, .hero-text {
     will-change: transform, opacity;
 }
-   /* ТЕСТОВЫЙ ЭФФЕКТ */
-   .hero-logo:hover {
-       transform: scale(1.2) rotate(10deg) !important;
-       transition: transform 0.5s ease;
-       cursor: pointer;
-   }
+  
    
