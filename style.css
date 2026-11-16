@@ -961,7 +961,6 @@ html {
 .hero-logo {
     transform-style: preserve-3d;
     will-change: transform;
-    transition: transform 0.1s linear;
 }
 
 /* ===== ПАРАЛЛАКС ФОНА ГЛАВНОГО ЭКРАНА ===== */
